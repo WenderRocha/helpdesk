@@ -6,24 +6,24 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
-import br.com.winvesti.helpdesk.domain.enums.Profile;
+import br.com.winvesti.helpdesk.domain.enums.Role;
 
 @Entity
-public class Client extends Person{
-	
+public class Client extends Person {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@OneToMany(mappedBy = "client")
 	private List<Request> requests = new ArrayList<>();
 
 	public Client() {
 		super();
-		addProfile(Profile.CLIENT);
+		addRole(Role.CLIENT);
 	}
 
 	public Client(Long id, String name, String cpf, String email, String password) {
 		super(id, name, cpf, email, password);
-		addProfile(Profile.CLIENT);
+		addRole(Role.CLIENT);
 	}
 
 	public List<Request> getRequests() {
@@ -33,7 +33,5 @@ public class Client extends Person{
 	public void setRequests(List<Request> requests) {
 		this.requests = requests;
 	}
-	
-	
-	
+
 }

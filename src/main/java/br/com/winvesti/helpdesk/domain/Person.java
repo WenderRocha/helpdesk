@@ -1,7 +1,6 @@
 package br.com.winvesti.helpdesk.domain;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +17,7 @@ import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import br.com.winvesti.helpdesk.domain.enums.Profile;
+import br.com.winvesti.helpdesk.domain.enums.Role;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -54,12 +53,12 @@ public abstract class Person implements Serializable {
 	@Getter(AccessLevel.NONE)
 	@Setter(AccessLevel.NONE)
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "PROFILES")
-	protected Set<Integer> profiles = new HashSet<>();
+	@CollectionTable(name = "ROLES")
+	protected Set<Integer> roles = new HashSet<>();
 
 	public Person() {
 		super();
-		addProfile(Profile.CLIENT);
+		addRole(Role.CLIENT);
 	}
 
 	public Person(Long id, String name, String cpf, String email, String password) {
@@ -69,15 +68,15 @@ public abstract class Person implements Serializable {
 		this.cpf = cpf;
 		this.email = email;
 		this.password = password;
-		addProfile(Profile.CLIENT);
+		addRole(Role.CLIENT);
 	}
 
-	public Set<Profile> getProfiles() {
-		return profiles.stream().map(x -> Profile.toEnum(x)).collect(Collectors.toSet());
+	public Set<Role> getProfiles() {
+		return roles.stream().map(x -> Role.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void addProfile(Profile profile) {
-		this.profiles.add(profile.getCode());
+	public void addRole(Role profile) {
+		this.roles.add(profile.getCode());
 	}
 
 }

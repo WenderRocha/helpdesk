@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.winvesti.helpdesk.domain.enums.Role;
 
 @Entity
@@ -13,6 +15,7 @@ public class Technical extends Person {
 
 	private static final long serialVersionUID = 1L;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "technical")
 	private List<Request> requests = new ArrayList<>();
 
@@ -30,8 +33,5 @@ public class Technical extends Person {
 		return requests;
 	}
 
-	public void setRequests(List<Request> requests) {
-		this.requests = requests;
-	}
 
 }
